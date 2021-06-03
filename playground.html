@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playground</title>
+
+    <!-- CSS only -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js"
+      integrity="sha256-Kr5Mbwq/xwJYw6XU4NR519/iosGvECYMyMU8IZ/rQok="
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://rawgit.com/fabricjs/fabric.js/master/lib/centering_guidelines.js"></script>
+    <script src="https://rawgit.com/fabricjs/fabric.js/master/lib/aligning_guidelines.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alata&family=Caveat&family=Cinzel&family=Comfortaa&family=Courier+Prime&family=Dancing+Script:wght@500&family=Engagement&family=Great+Vibes&family=Josefin+Sans&family=Lobster&family=Magra&family=Mali&family=Pacifico&family=Plaster&family=Poly&family=Raleway&family=Raleway+Dots&family=Roboto:wght@100&family=Rubik&family=Russo+One&family=Special+Elite&family=Waiting+for+the+Sunrise&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chewy&family=Courgette&family=Economica&family=Kaushan+Script&family=Lobster+Two&family=Montserrat&family=Orbitron&family=Satisfy&family=Titillium+Web:wght@300&family=Ubuntu:wght@300&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/kineticjs/5.2.0/kinetic.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+    <link rel="stylesheet" href="libs/enjoyhint.css" />
+    <script src="libs/enjoyhint.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+    <!-- Modal -->
+    <div class="hidden" style="padding: 0; margin: 0"></div>
+
+    <div class="row">
+      <div class="col-4">
+        <div class="style-box">
+          <div class="top-buttons">
+            <div
+              class="btn-group btn-group-sm"
+              role="group"
+              aria-label="Basic example"
+            >
+              <button
+                type="button"
+                id="preview"
+                class="preview-btn"
+                onclick="previewCanvas()"
+              >
+                Preview
+              </button>
+              <button
+                type="button"
+                onclick="downloadJson()"
+                id="canvas2json"
+                class="tojson-btn"
+              >
+                To JSON
+              </button>
+              <label class="upload">
+                <input
+                  type="file"
+                  id="loadJson2Canvas"
+                  class="upload-input"
+                  accept="application/JSON"
+                />
+                From JSON
+              </label>
+            </div>
+          </div>
+
+          <h4>Properties</h4>
+
+          <div>
+            <button onclick="Delete()" class="delete">Delete</button>
+            <button onclick="backward()">Backward</button>
+            <button onclick="toBack()">To Back</button>
+            <button onclick="forward()">Forward</button>
+            <button onclick="toFront()">To Front</button>
+
+            <div class="left-container">
+              <div class="row">
+                <div class="col-md-2 mb-3">
+                  <ul
+                    class="nav nav-pills flex-column"
+                    id="myTab"
+                    role="tablist"
+                  >
+                    <li class="nav-item">
+                      <a
+                        class="nav-link active"
+                        id="home-tab"
+                        data-toggle="tab"
+                        href="#text"
+                        role="tab"
+                        aria-controls="home"
+                        aria-selected="true"
+                        >Text</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        id="profile-tab"
+                        data-toggle="tab"
+                        href="#shapes"
+                        role="tab"
+                        aria-controls="profile"
+                        aria-selected="false"
+                        >Shapes</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        id="contact-tab"
+                        data-toggle="tab"
+                        href="#upload"
+                        role="tab"
+                        aria-controls="contact"
+                        aria-selected="false"
+                        >Uploads</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        id="contact-tab"
+                        data-toggle="tab"
+                        href="#mask"
+                        role="tab"
+                        aria-controls="contact"
+                        aria-selected="false"
+                        >Mask</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        id="contact-tab"
+                        data-toggle="tab"
+                        href="#code"
+                        role="tab"
+                        aria-controls="contact"
+                        aria-selected="false"
+                        >Code</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        id="contact-tab"
+                        data-toggle="tab"
+                        href="#animation"
+                        role="tab"
+                        aria-controls="contact"
+                        aria-selected="false"
+                        >Animation</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        data-toggle="tab"
+                        href="#filters"
+                        role="tab"
+                        aria-controls="contact"
+                        aria-selected="false"
+                        >Filters</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        id="contact-tab"
+                        data-toggle="tab"
+                        href="#layers"
+                        role="tab"
+                        aria-controls="contact"
+                        aria-selected="false"
+                        >Layers</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <!-- /.col-md-4 -->
+                <div
+                  class="col-md-9"
+                  style="padding-right: 0; padding-left: 2em"
+                >
+                  <div class="tab-content" id="myTabContent">
+                    <div
+                      class="tab-pane fade show active"
+                      id="text"
+                      role="tabpanel"
+                      aria-labelledby="home-tab"
+                    >
+                      <div id="text-wrapper" class="bgColor">
+                        <h5>Text</h5>
+                        <button class="addText" onclick="Addtext()">
+                          Add Text
+                        </button>
+
+                        <div id="text-controls">
+                          <label for="text-color">Font color:</label>
+                          <input type="color" id="text-color" size="10" />
+                          <br />
+                          <label for="font-family" style="display: inline-block"
+                            >Font family:</label
+                          >
+                          <div class="dropdown">
+                            <button
+                              class="dropdown-toggle fontFamily"
+                              type="button"
+                              id="font-family"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="true"
+                            >
+                              Font
+                              <span class="caret"></span>
+                            </button>
+                            <ul
+                              class="dropdown-menu"
+                              aria-labelledby="dropdownMenu1"
+                              id="font-family"
+                            >
+                              <li
+                                id="arial-font"
+                                style="
+                                  font-family: 'Franklin Gothic Medium',
+                                    'Arial Narrow', Arial, sans-serif;
+                                "
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Arial</a>
+                              </li>
+
+                              <li
+                                id="dancing-script-font"
+                                style="font-family: 'Dancing Script'"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Dancing Script</a>
+                              </li>
+
+                              <li
+                                id="great-vibes-font"
+                                style="font-family: 'Great Vibes'"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Great Vibes</a>
+                              </li>
+
+                              <li
+                                id="josefin-sans-font"
+                                style="font-family: 'Josefin Sans'"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Josefin Sans</a>
+                              </li>
+
+                              <li
+                                id="abril-fatface-font"
+                                style="font-family: 'Abril fatface'"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Abril fatface</a>
+                              </li>
+
+                              <li
+                                id="caveat-font"
+                                style="font-family: 'Caveat'"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Caveat</a>
+                              </li>
+
+                              <li
+                                id="cinzel-font"
+                                style="font-family: 'Cinzel'"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Cinzel</a>
+                              </li>
+
+                              <li
+                                id="special-elite-font"
+                                style="font-family: 'Special Elite'"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Special Elite</a>
+                              </li>
+
+                              <li
+                                id="sunrise-font"
+                                style="font-family: 'Waiting for the Sunrise'"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);"
+                                  >Waiting for the Sunrise</a
+                                >
+                              </li>
+
+                              <li
+                                id="russo-one-font"
+                                style="font-family: 'Russo One'"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Russo One</a>
+                              </li>
+
+                              <li
+                                id="raleway-dots-font"
+                                style="font-family: 'Raleway Dots'"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Raleway Dots</a>
+                              </li>
+
+                              <li
+                                id="raleway-font"
+                                style="font-family: Raleway"
+                                onclick="font(this.id)"
+                              >
+                                <a
+                                  href="javascript:void(0);"
+                                  id="raleway-font"
+                                  aria-valuetext="raleway"
+                                  >Raleway</a
+                                >
+                              </li>
+
+                              <li
+                                id="montserrat-font"
+                                style="font-family: Montserrat"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Montserrat</a>
+                              </li>
+                              <li
+                                id="titillium-font"
+                                style="font-family: Titillium Web"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Titillium Web</a>
+                              </li>
+
+                              <li
+                                style="font-family: Pacifico"
+                                id="pacifico-font"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Pacifico</a>
+                              </li>
+
+                              <li
+                                id="josefin-slab-font"
+                                style="font-family: 'Josefin Slab'"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Josefin Slab</a>
+                              </li>
+                              <li
+                                id="orbitron-font"
+                                style="font-family: Orbitron"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Orbitron</a>
+                              </li>
+                              <li
+                                id="comfortaa-font"
+                                style="font-family: Comfortaa"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Comfortaa</a>
+                              </li>
+                              <li
+                                id="courgette-font"
+                                style="font-family: Courgette"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Courgette</a>
+                              </li>
+                              <li
+                                id="ubuntu-font"
+                                style="font-family: Ubuntu"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Ubuntu</a>
+                              </li>
+                              <li
+                                id="chewy-font"
+                                style="font-family: Chewy"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Chewy</a>
+                              </li>
+                              <li
+                                id="lobster-two-font"
+                                style="font-family: Lobster Two"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Lobster Two</a>
+                              </li>
+                              <li
+                                id="kaushan-script-font"
+                                style="font-family: Kaushan Script"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Kaushan Script</a>
+                              </li>
+                              <li
+                                id="economica-font"
+                                style="font-family: Economica"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Economica</a>
+                              </li>
+                              <li
+                                id="satisfy-font"
+                                style="font-family: Satisfy"
+                                onclick="font(this.id)"
+                              >
+                                <a href="javascript:void(0);">Satisfy</a>
+                              </li>
+                            </ul>
+                          </div>
+
+                          <br />
+                          <label for="text-align" style="display: inline-block"
+                            >Text align:</label
+                          >
+                          <select id="text-align">
+                            <option value="left">Left</option>
+                            <option value="center">Center</option>
+                            <option value="right">Right</option>
+                            <option value="justify">Justify</option>
+                          </select>
+
+                          <div>
+                            <label for="text-lines-bg-color"
+                              >Background text color:</label
+                            >
+                            <input
+                              type="color"
+                              id="text-lines-bg-color"
+                              size="10"
+                            />
+                          </div>
+
+                          <div>
+                            <label for="text-stroke-color">Stroke color:</label>
+                            <input type="color" id="text-stroke-color" />
+                          </div>
+                          <div>
+                            <label for="text-stroke-width">Stroke width:</label>
+                            <input
+                              type="range"
+                              value="5"
+                              min="5"
+                              max="10"
+                              id="text-stroke-width"
+                            />
+                          </div>
+                          <div>
+                            <label for="text-font-size">Font size:</label>
+                            <input
+                              type="range"
+                              value=""
+                              min="1"
+                              max="120"
+                              step="1"
+                              id="text-font-size"
+                            />
+                          </div>
+                          <div>
+                            <label for="text-line-height">Line height:</label>
+                            <input
+                              type="range"
+                              value=""
+                              min="0"
+                              max="10"
+                              step="0.1"
+                              id="text-line-height"
+                            />
+                          </div>
+                        </div>
+                        <div id="text-controls-additional">
+                          <input
+                            type="checkbox"
+                            name="fonttype"
+                            id="text-cmd-bold"
+                          />
+                          Bold
+
+                          <!-- <button id="bold">Bold</button> -->
+
+                          <input
+                            type="checkbox"
+                            name="fonttype"
+                            id="text-cmd-italic"
+                          />
+                          Italic
+                          <!-- <button id="italic">Italic</button> -->
+                          <br />
+                          <input
+                            type="checkbox"
+                            name="fonttype"
+                            id="text-cmd-underline"
+                          />
+                          Underline
+
+                          <input
+                            type="checkbox"
+                            name="fonttype"
+                            id="text-cmd-linethrough"
+                          />
+                          Linethrough
+
+                          <input
+                            type="checkbox"
+                            name="fonttype"
+                            id="text-cmd-overline"
+                          />
+                          Overline
+
+                          <input
+                            type="checkbox"
+                            name="fonttype"
+                            id="text-shadow"
+                          />
+                          Shadow
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="tab-pane fade"
+                      id="shapes"
+                      role="tabpanel"
+                      aria-labelledby="profile-tab"
+                    >
+                      <!-- graphics -->
+
+                      <div id="graphics" class="bgColor">
+                        <h5>Graphics</h5>
+                        <button class="shapeBtn" onclick="AddRect()">
+                          Rectangle
+                        </button>
+                        <button class="shapeBtn" onclick="AddCircle()">
+                          Circle
+                        </button>
+                        <button class="shapeBtn" onclick="AddTriangle()">
+                          Triangle
+                        </button>
+                        <button class="shapeBtn" onclick="AddEllipse()">
+                          Ellipse
+                        </button>
+                        <button class="shapeBtn" onclick="AddTrapezium()">
+                          Trapezium
+                        </button>
+                        <button class="shapeBtn" onclick="AddStar4()">
+                          Star (4)
+                        </button>
+                        <button class="shapeBtn" onclick="AddStar5()">
+                          Star (5)
+                        </button>
+
+                        <div id="graphic-controls">
+                          <div>
+                            <label for="graphic-stroke-color"
+                              >Stroke color:</label
+                            >
+                            <input type="color" id="graphic-stroke-color" />
+                          </div>
+                          <div>
+                            <label for="graphic-stroke-width"
+                              >Stroke width:</label
+                            >
+                            <input
+                              type="range"
+                              value="5"
+                              min="0"
+                              max="10"
+                              id="graphic-stroke-width"
+                            />
+                          </div>
+                          <div>
+                            <label for="graphic-color">Fill color:</label>
+                            <input type="color" id="graphic-color" size="10" />
+                          </div>
+
+                          <label for="skew-x">SkewX:</label>
+                          <input type="number" id="skew-x" />
+
+                          <label for="skew-y">SkewY:</label>
+                          <input type="number" id="skew-y" />
+
+                          <label for="rx">Radius X:</label>
+                          <input type="number" id="rx" />
+
+                          <label for="ry">Radius Y:</label>
+                          <input type="number" id="ry" />
+                          <label for="graphic-opacity">Opacity:</label>
+                          <input type="number" id="graphic-opacity" />
+
+                          <label for="grdColor1">Gradient-1:</label>
+                          <input type="color" id="grdColor1" />
+
+                          <label for="grdColor2">Gradient-2:</label>
+                          <input type="color" id="grdColor2" />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="tab-pane fade"
+                      id="upload"
+                      role="tabpanel"
+                      aria-labelledby="contact-tab"
+                    >
+                      <!-- uploads -->
+                      <div id="uploads" class="bgColor">
+                        <h5>Upload Media</h5>
+
+                        <form action="">
+                          <label for="imgUpload">Upload Image</label>
+                          <br />
+                          <input
+                            id="imgUpload"
+                            class="uploadMedia"
+                            type="file"
+                            accept="image/*"
+                          />
+
+                          <br />
+                          <br />
+                          <label for="videoUpload">Upload Video</label>
+                          <br />
+                          <input
+                            id="videoUpload"
+                            class="uploadMedia"
+                            type="file"
+                            accept="video/*"
+                          />
+                        </form>
+
+                        <div id="waveform"></div>
+                        <button
+                          class="btn btn-primary"
+                          onclick="wavesurfer.playPause()"
+                        >
+                          <i class="glyphicon glyphicon-play"></i>
+                          Play/Pause
+                        </button>
+                      </div>
+                    </div>
+
+                    <div
+                      class="tab-pane fade"
+                      id="mask"
+                      role="tabpanel"
+                      aria-labelledby="contact-tab"
+                    >
+                      <!-- uploads -->
+                      <div id="masks" class="bgColor">
+                        <h5>Add Mask</h5>
+                        <label for="mask-shape" style="display: inline-block"
+                          >Text align:</label
+                        >
+                        <select
+                          id="mask-shape"
+                          onload="toggleMaskOptions(this)"
+                          onchange="toggleMaskOptions(this)"
+                        >
+                          <option value="rectangle" selected>Rectangle</option>
+                          <option value="circle">Circle</option>
+                        </select>
+                        <div class="rectShape">
+                          <label for="top">Top:</label>
+                          <input
+                            type="number"
+                            value=""
+                            min="10"
+                            max="500"
+                            step="1"
+                            id="top"
+                          />
+                          <label for="left">Left:</label>
+                          <input
+                            type="number"
+                            value=""
+                            min="10"
+                            max="500"
+                            step="1"
+                            id="left"
+                          />
+                          <br />
+                          <br />
+                          <div id="rect-cols">
+                            <label for="rect-width">Rect Width:</label>
+                            <input
+                              type="number"
+                              value=""
+                              min="10"
+                              max="500"
+                              step="1"
+                              id="rect-width"
+                            />
+                            <br />
+                            <label for="rect-height">Rect Height:</label>
+                            <input
+                              type="number"
+                              value=""
+                              min="10"
+                              max="500"
+                              step="1"
+                              id="rect-height"
+                            />
+                            <br />
+                          </div>
+                          <div id="circle-cols" class="hidden-div">
+                            <label for="circle-radius">Circle Radius:</label>
+                            <input
+                              type="number"
+                              value=""
+                              min="10"
+                              max="500"
+                              step="1"
+                              id="circle-radius"
+                            />
+                          </div>
+                          <br />
+                          <button type="button" onclick="applyMask()">
+                            Apply Mask
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="tab-pane fade"
+                      id="code"
+                      role="tabpanel"
+                      aria-labelledby="contact-tab"
+                    >
+                      <div id="gsapCode" class="bgColor">
+                        <h5>GSAP Code</h5>
+                        <div id="ace">var tl = new gsap.timeline();</div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="tab-pane fade"
+                      id="layers"
+                      role="tabpanel"
+                      aria-labelledby="contact-tab"
+                    >
+                      <div id="gsapCode" class="bgColor">
+                        <h5>Layers</h5>
+                        <ul id="containerLayers"></ul>
+                      </div>
+                    </div>
+
+                    <div
+                      class="tab-pane fade"
+                      id="filters"
+                      role="tabpanel"
+                      aria-labelledby="contact-tab"
+                    >
+                      <div id="gsapCode" class="bgColor">
+                        <h5>Filters</h5>
+                        <div id="filter-card">
+                          <label
+                            ><span>Blend Color:</span>
+                            <input type="checkbox" id="blend"
+                          /></label>
+                          <br />
+                          <label>Mode:</label>
+                          <select id="blend-mode" name="blend-mode">
+                            <option selected value="add">Add</option>
+                            <option value="diff">Diff</option>
+                            <option value="subtract">Subtract</option>
+                            <option value="multiply">Multiply</option>
+                            <option value="screen">Screen</option>
+                            <option value="lighten">Lighten</option>
+                            <option value="darken">Darken</option>
+                            <option value="overlay">Overlay</option>
+                            <option value="exclusion">Exclusion</option>
+                            <option value="tint">Tint</option>
+                          </select>
+                          <br />
+                          <label
+                            >Color:
+                            <input
+                              type="color"
+                              id="blend-color"
+                              value="#00f900" /></label
+                          ><br />
+                          <label
+                            >Alpha:
+                            <input
+                              type="range"
+                              id="blend-alpha"
+                              min="0"
+                              max="1"
+                              value="1"
+                              step="0.01" /></label
+                          ><br />
+                        </div>
+
+                        <div id="filter-card">
+                          <label for="blend-image">Upload Image</label>
+                          <br />
+                          <input
+                            id="blend-image"
+                            class="uploadMedia"
+                            type="file"
+                            accept="image/*"
+                          />
+
+                          <br />
+                          <label>Mode:</label>
+                          <select id="blend-image-mode" name="blend-image-mode">
+                            <option selected value="multiply">Multiply</option>
+                            <option value="mask">Mask</option>
+                          </select>
+                          <br />
+                          <label
+                            >Alpha:
+                            <input
+                              type="range"
+                              id="blend-image-alpha"
+                              min="0"
+                              max="1"
+                              value="1"
+                              step="0.01" /></label
+                          ><br />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="tab-pane fade"
+                      id="animation"
+                      role="tabpanel"
+                      aria-labelledby="contact-tab"
+                    >
+                      <div id="animations" class="bgColor">
+                        <h5>Animations</h5>
+
+                        <div class="animFunctions">
+                          <p>Fade</p>
+                          <button
+                            onclick="fromLeft(canvas.getActiveObject(),2)"
+                          >
+                            From Left
+                          </button>
+                          <button
+                            onclick="fromRight(canvas.getActiveObject(),2)"
+                          >
+                            From Right
+                          </button>
+                          <button onclick="fromUp(canvas.getActiveObject(),2)">
+                            From Up
+                          </button>
+                          <button
+                            onclick="fromDown(canvas.getActiveObject(),2)"
+                          >
+                            From Down
+                          </button>
+                          <button onclick="fadeIn(canvas.getActiveObject(),2)">
+                            Fade in
+                          </button>
+                          <hr />
+                          <br />
+                          <p>Shift</p>
+                          <button>From Left</button>
+                          <button>From Right</button>
+                          <button>From Up</button>
+                          <button>From Down</button>
+                          <hr />
+                          <br />
+                          <p>Slide</p>
+                          <button>From Left</button>
+                          <button>From Right</button>
+                          <button>From Up</button>
+                          <button>From Down</button>
+                          <hr />
+                          <br />
+                          <p>Zoom</p>
+                          <button>From Left</button>
+                          <button>From Right</button>
+                          <button>From Up</button>
+                          <button>From Down</button>
+                          <button>Zoom In</button>
+                          <button>Zoom Out</button>
+                          <hr />
+                          <br />
+                          <p>Bounce</p>
+                          <button>From Left</button>
+                          <button>From Right</button>
+                          <button>From Up</button>
+                          <button>From Down</button>
+                          <button>Bounce In</button>
+                          <hr />
+                          <br />
+                          <p>Rotate</p>
+                          <button>Rotate In</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.col-md-8 -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-8">
+        <div class="canvas-box">
+          <h2>Playground Canvas</h2>
+          <canvas id="canv" width="858" height="480"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <script src="gsap.min.js"></script>
+    <!-- <script src="jquery.min.js"></script> -->
+    <script src="fabric.min.js"></script>
+
+    <!-- <script src="inactivity.js"></script> -->
+    <script src="animations.js"></script>
+
+    <script src="playground.js"></script>
+    <script>
+      var wavesurfer = WaveSurfer.create({
+        container: "#waveform",
+        waveColor: "grey",
+        progressColor: "#005EFF",
+
+        minPxPerSec: 1,
+        fillParent: true,
+      });
+
+      wavesurfer.load("music.mp3");
+      // function playTrack() {
+      //   wavesurfer.play();
+      // }
+
+      var responsiveWave = wavesurfer.util.debounce(function () {
+        wavesurfer.empty();
+        wavesurfer.drawBuffer();
+      }, 150);
+
+      window.addEventListener("resize", responsiveWave);
+    </script>
+    <!-- <script src="enjoyhint.js"></script> -->
+  </body>
+</html>

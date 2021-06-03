@@ -1,0 +1,342 @@
+@import url("http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css");
+
+body {
+  background-color: rgb(238, 239, 240);
+}
+
+#canv {
+  border: 1px solid black;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.canvas-container {
+  margin: 0;
+}
+
+.canvas-box {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.after-box {
+  clear: left;
+}
+
+#text-wrapper {
+  padding: 0.5em;
+  /* margin: 1em; */
+  border-radius: 0.6em;
+  width: 310px;
+  /* background-color: white; */
+  /* color: black; */
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 8px 0 rgba(255, 255, 255, 0.705);
+}
+
+h4 {
+  text-align: center;
+}
+
+#text-controls,
+#text-controls-additional,
+#filter-card {
+  border: 1px solid lightgrey;
+  padding: 0.2em;
+  margin: 0.2em;
+}
+
+#graphics {
+  padding: 0.5em;
+  width: 310px;
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 8px 0 rgba(255, 255, 255, 0.705);
+  /* margin: 1em; */
+  border-radius: 0.6em;
+}
+
+#graphic-controls,
+.animFunctions {
+  border: 1px solid lightgrey;
+  padding: 0.2em;
+  margin: 0.2em;
+}
+
+#uploads,
+#masks,
+#gsapCode,
+#animations {
+  padding: 0.5em;
+  /* margin: 1em; */
+  width: 310px;
+  border-radius: 0.6em;
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 8px 0 rgba(255, 255, 255, 0.705);
+}
+
+.top-buttons {
+  border: 1px solid rgb(199, 196, 196);
+  padding: 0.5em;
+  margin: 1em;
+  border-radius: 0.5em;
+  text-align: center;
+  background-color: rgb(199, 196, 196);
+}
+
+.style-box {
+  /* overflow-y: scroll; */
+  height: 80vh;
+  padding-left: 0.5em;
+}
+
+.nav-item .nav-link {
+  padding: 0.2em;
+  font-size: 15px;
+  text-align: center;
+  color: grey;
+  font-weight: 600;
+  margin-bottom: 1em;
+}
+
+.nav-item .nav-link:hover {
+  color: rgb(41, 41, 41);
+}
+
+.nav-pills {
+  margin: 0.2em;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #005eff;
+}
+
+button {
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  color: rgb(88, 88, 88);
+  font-weight: 600;
+  border-radius: 0.5em;
+  background-color: #f8f8f8;
+}
+
+button:hover {
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 0.5em;
+  background-color: #005eff;
+  color: white;
+}
+
+button:active,
+button:focus {
+  outline: none;
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+.uploadMedia {
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  width: 80%;
+  overflow: hidden;
+}
+
+.uploadMedia:active,
+.uploadMedia:focus {
+  outline-style: none;
+}
+
+.bgColor {
+  background: linear-gradient(
+    -45deg,
+    rgba(145, 143, 143, 0.22),
+    rgba(236, 236, 236, 0.25)
+  );
+}
+
+.upload {
+  margin-bottom: 0;
+  color: white;
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+.delete {
+  background-color: rgb(241, 163, 163);
+}
+
+.delete:hover {
+  background-color: rgb(196, 67, 67);
+  color: white;
+}
+
+.left-container {
+  margin-top: 1em;
+}
+
+.rectShape,
+.circleShape {
+  border: 1px solid lightgrey;
+  padding: 0.2em;
+  margin: 0.2em;
+}
+
+input,
+select {
+  border: 1px solid rgb(197, 194, 194);
+  border-radius: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+input:focus,
+input:active,
+select:focus,
+select:active {
+  /* outline-style: none; */
+  outline-color: #005eff;
+  border-radius: 0.5em;
+}
+
+#gsapCode {
+  position: relative;
+  height: 70vh;
+}
+
+#ace {
+  position: absolute;
+  top: 3em;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-size: 1rem;
+}
+
+.shapeBtn {
+  margin-bottom: 0.3em;
+}
+
+#myTextArea {
+  width: 90%;
+  height: 200px;
+}
+
+.hidden-div {
+  display: none;
+}
+
+#animations {
+  overflow-y: scroll;
+  height: 50vh;
+}
+
+#animations button {
+  margin: 0.3em;
+}
+
+#animations p {
+  margin-bottom: 0;
+  color: rgb(71, 71, 71);
+  font-weight: 600;
+}
+
+#animations hr {
+  margin: 0;
+}
+
+.preview-btn {
+  background-color: #005eff;
+  color: white;
+  border-radius: 0.2em;
+}
+
+.preview-btn:hover {
+  background-color: darkblue;
+  border-radius: 0.2em;
+}
+
+.tojson-btn {
+  background-color: rgb(104, 103, 103);
+  color: white;
+  border-radius: 0.2em;
+}
+
+.tojson-btn:hover {
+  background-color: rgb(73, 73, 73);
+  border-radius: 0.2em;
+}
+
+.upload-input {
+  display: none;
+}
+
+.upload {
+  background-color: rgba(240, 207, 18, 0.973);
+  padding: 0.2em;
+  border-radius: 0.2em;
+}
+
+.upload:hover {
+  background-color: rgba(197, 170, 18, 0.973);
+  cursor: pointer;
+}
+
+.dropdown a {
+  color: black;
+  margin: 0.5em 0;
+}
+
+.dropdown li {
+  margin: 0.5em;
+}
+
+.dropdown-menu {
+  height: 250px;
+  overflow-y: scroll;
+}
+
+#containerLayers {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+#containerLayers li {
+  margin: 0 0 2px 4px;
+  padding: 1em;
+  padding-left: 1.5em;
+  height: 15px;
+  cursor: move;
+  line-height: 1;
+}
+#containerLayers li span {
+  position: absolute;
+  margin-left: -1.3em;
+}
+
+.actived {
+  border: 1px solid black;
+}
+
+.hintBtn,
+.enjoyhint_prev_btn {
+  color: white;
+  background-color: #005eff;
+  border: none;
+}
+.hintBtn:hover,
+.enjoyhint_prev_btn:hover {
+  background-color: #00c0d9;
+}
+#myInput:active,
+#myInput:focus {
+  outline: none;
+  border: none;
+}
+#myInput {
+  top: -12px;
+  position: relative;
+  background-color: transparent;
+  border: none;
+}
+.inpCheck {
+  position: relative;
+  top: -12px;
+}
